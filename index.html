@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="km">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gold Pulse — XAUUSD Market Dashboard</title>
+<style>
+:root{--bg:#090d16;--panel:#111827;--panel2:#151f30;--line:#263449;--muted:#91a0b7;--text:#edf3ff;--green:#20d69a;--red:#ff6176;--yellow:#f4c65e;--blue:#56a8ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 20% 0%,#18243a 0,transparent 42%),var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Noto Sans Khmer",sans-serif}
+header{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid var(--line);background:#0b111dcc;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:18px}.logo{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#f5c45e,#a86c17);display:grid;place-items:center;color:#16120a;font-weight:900}
+.pill{border:1px solid var(--line);padding:6px 10px;border-radius:20px;color:var(--muted);font-size:12px}.live{color:var(--green)}main{max-width:1440px;margin:auto;padding:20px}
+h1{font-size:23px;margin:0 0 5px}h2{font-size:15px;margin:0 0 14px}.sub{color:var(--muted);margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0}
+.card{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:15px;min-width:0}
+.kicker{color:var(--muted);font-size:12px}.value{font-size:22px;font-weight:800;margin-top:5px}.hint{font-size:12px;color:var(--muted);margin-top:4px}
+.green{color:var(--green)}.red{color:var(--red)}.yellow{color:var(--yellow)}
+.layout{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(290px,1fr);gap:14px}
+.chartbox{height:540px;overflow:hidden;padding:8px}.tv{height:100%;width:100%}
+.side{display:grid;gap:14px;align-content:start}.widget{height:320px;overflow:hidden}.widget.tall{height:430px}
+iframe{width:100%;height:100%;border:0}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+.newslinks{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.note{border-left:3px solid var(--yellow);padding:10px 12px;background:#f4c65e12;border-radius:7px;color:#d9e1ef;font-size:12px;margin-top:12px}
+.bottom{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.status{display:inline-flex;gap:6px;align-items:center;font-size:12px;color:var(--muted)}.dot{width:7px;height:7px;background:var(--green);border-radius:50%}
+footer{color:var(--muted);font-size:11px;text-align:center;padding:25px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}.chartbox{height:470px}.bottom{grid-template-columns:1fr}}
+@media(max-width:520px){header{padding:12px}main{padding:13px}.grid{gap:8px}.card{padding:12px}.value{font-size:18px}.chartbox{height:410px}.pill{font-size:10px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="logo">Au</div><div>GOLD PULSE <span style="color:var(--muted);font-weight:500">/ XAUUSD</span></div></div>
+  <div class="pill"><span class="dot"></span> Dashboard · <span class="live">Live widgets</span></div>
+</header>
+<main>
+  <h1>ផ្ទាំងវិភាគទីផ្សារមាស</h1>
+  <div class="sub">XAU/USD · តម្លៃ និងព័ត៌មានសេដ្ឋកិច្ចសម្រាប់ជួយសម្រេចចិត្ត</div>
+
+  <section class="grid">
+    <div class="card"><div class="kicker">ទ្រព្យសកម្ម</div><div class="value">XAUUSD</div><div class="hint">Gold / US Dollar · Spot</div></div>
+    <div class="card"><div class="kicker">ប្រភពក្រាហ្វ</div><div class="value green">TradingView</div><div class="hint">ទិន្នន័យតាម provider របស់ TradingView</div></div>
+    <div class="card"><div class="kicker">ព័ត៌មានសេដ្ឋកិច្ច</div><div class="value yellow">Economic Calendar</div><div class="hint">ពិនិត្យព្រឹត្តិការណ៍ USD និងមាស</div></div>
+    <div class="card"><div class="kicker">ស្ថានភាពវិភាគ</div><div class="value">ជំនួយសម្រេចចិត្ត</div><div class="hint">មិនមែនសញ្ញាទិញ/លក់ធានាចំណេញទេ</div></div>
+  </section>
+
+  <div class="layout">
+    <section class="card chartbox">
+      <div class="section-head"><h2>ក្រាហ្វតម្លៃ XAUUSD</h2><span class="status"><span class="dot"></span> Chart widget</span></div>
+      <div id="tv_chart" class="tv"></div>
+    </section>
+    <aside class="side">
+      <section class="card widget">
+        <h2>សូចនាករបច្ចេកទេស</h2>
+        <div id="tv_technical" style="height:270px"></div>
+      </section>
+      <section class="card">
+        <h2>ប្រភពព័ត៌មាន Forex</h2>
+        <p class="hint">Forex Factory Calendar សម្រាប់តាមដាន CPI, NFP, FOMC, PCE និងព័ត៌មាន USD ដែលអាចប៉ះពាល់ដល់មាស។</p>
+        <div class="newslinks">
+          <a href="https://www.forexfactory.com/calendar" target="_blank" rel="noopener">បើក Forex Factory Calendar ↗</a>
+          <a href="https://www.forexfactory.com/news" target="_blank" rel="noopener">Forex Factory News ↗</a>
+        </div>
+        <div class="note">Forex Factory មិនមាន public API ដែលអាចប្រើបានដោយសេរី និងមានស្ថិរភាពទេ។ ដូច្នេះគេហទំព័រនេះមិន scrape ទិន្នន័យពីគេហទំព័រនោះដោយស្វ័យប្រវត្តិទេ។</div>
+      </section>
+    </aside>
+  </div>
+
+  <div class="bottom">
+    <section class="card widget tall">
+      <div class="section-head"><h2>Economic Calendar</h2><a href="https://www.tradingview.com/economic-calendar/" target="_blank" rel="noopener">មើលពេញ ↗</a></div>
+      <div id="tv_calendar" style="height:370px"></div>
+    </section>
+    <section class="card">
+      <h2>របៀបប្រើព័ត៌មានដើម្បីវិភាគមាស</h2>
+      <p><b class="yellow">USD ខ្លាំង / Bond yield ឡើង</b><br><span class="hint">ជាទូទៅអាចដាក់សម្ពាធលើមាស ប៉ុន្តែមិនមែនគ្រប់ពេលទេ។</span></p>
+      <p><b class="green">USD ខ្សោយ / Yield ធ្លាក់</b><br><span class="hint">អាចជាកត្តាគាំទ្រតម្លៃមាស។ ត្រូវផ្ទៀងផ្ទាត់ជាមួយ price action។</span></p>
+      <p><b>ព័ត៌មាន High Impact</b><br><span class="hint">ប្រយ័ត្ន CPI, NFP, FOMC និង PCE។ Spread និង volatility អាចកើនខ្លាំង។</span></p>
+      <div class="note">សូមប្រើ M15/H1 ដើម្បីមើលទិសដៅ និងរង់ចាំ BOS/CHoCH ឬ retest មុនចូលទីផ្សារ។ កំណត់ Stop Loss ជានិច្ច។</div>
+    </section>
+  </div>
+</main>
+<footer>Gold Pulse · GitHub Pages starter · មិនមែនជាដំបូន្មានវិនិយោគ</footer>
+
+<script src="https://s3.tradingview.com/tv.js"></script>
+<script>
+new TradingView.widget({
+  autosize:true, symbol:"OANDA:XAUUSD", interval:"15", timezone:"Asia/Phnom_Penh",
+  theme:"dark", style:"1", locale:"en", enable_publishing:false,
+  allow_symbol_change:true, calendar:false, support_host:"https://www.tradingview.com",
+  container_id:"tv_chart", hide_side_toolbar:false, studies:["STD;RSI","STD;MACD"]
+});
+</script>
+<script src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+{
+  "interval":"15m","width":"100%","isTransparent":true,"height":"100%",
+  "symbol":"OANDA:XAUUSD","showIntervalTabs":true,"displayMode":"single",
+  "locale":"en","colorTheme":"dark"
+}
+</script>
+<script src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+{
+  "colorTheme":"dark","isTransparent":true,"width":"100%","height":"100%",
+  "locale":"en","importanceFilter":"-1,0,1","countryFilter":"US"
+}
+</script>
+</body>
+</html>
